@@ -1,7 +1,0 @@
-Hello This is my text File that I'm using to learn how to use git/github.
-This adds my second line of code. 
-Also I need to figure out what this command means:
-git push -u origin main
- - what does the "-u", "origin", and "main" mean? How are they connected?
- 
- This is a line we added in our new branch <3

@@ -1,10 +1,19 @@
+let drawing = "1";
 function setup() {
     createCanvas(200, 200);
-    noLoop();
+    // noLoop();
   }
   
   function draw() {
-    opaque();
+    if(drawing === "1"){
+      first();
+    } else if(drawing === "2"){
+      opaque();
+    } else if(drawing === "3"){
+      third(); 
+    }  else {
+      star();
+    }
   }
   function opaque(){
     strokeWeight(0);
@@ -40,6 +49,9 @@ function setup() {
   function first(){
     //200 x 100
     background("#77f23b");
+    strokeWeight(1);
+    stroke("black");
+    fill("white");
     circle(50, 50, 80);
     square(110, 10, 80);
   }
@@ -66,4 +78,10 @@ function setup() {
     vertex(112, 85);//2nd right
     vertex(100, 50);//end point
     endShape(CLOSE);
+  }
+
+  function setDrawing(drawingParam){
+    drawing = drawingParam; 
+    background("white");
+   
   }
