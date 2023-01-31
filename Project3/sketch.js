@@ -3,7 +3,8 @@ let singerArray;
 let x = 500;
 let y = 250;
 let r = 0;
-let i = -1 ;
+let i = -1;
+let singer;
 
 function preload() {
     singer1 = loadImage("assets/singer/frame1.png");
@@ -22,23 +23,54 @@ function setup() {
     angleMode(DEGREES);
     frameRate(10);
     singerArray = [singer1, singer2, singer3, singer4, singer5, singer6, singer7, singer8];
+    singer = new Sprite(singerArray, x, y);
 }
 
 function draw() {
     background(255);
-    translate(x, y);
+    singer.draw();
+    
+    // image(singerArray[0], x, y);
     // rotate(r);//its important that translate happens before the rotation. 
     // r += 5; 
     // scale(-0.4); //flips the image can specify x and y as well.
-    scale(-0.4, 0.4);
-
-    if( i > 6){
-        i = -1; 
-       
-    }
-    i++; 
-    console.log("i: " + i);
-    image(singerArray[i], 0, 0);
+    // scale(-0.4, 0.4);
+    // if (i > 6) {
+    //     i = -1;
+    // }
+    // i++;
+    // image(singerArray[i], 0, 0);
     //Use push and pop to make sure the rest of the screen isnt transformed. 
     //You can set the width of image by: "0.25 * singer1.width"; 
+}
+
+function keyIsDown() {
+    singer.keyPressed();
+}
+
+class Sprite {
+    constructor(imgArray, x, y) {
+        this.imgArray = imgArray;
+        this.x = x; 
+        this.y = y; 
+        
+    }
+    keyPressed() {
+        if (keyCode === LEFT_ARROW) {
+            console.log("hey");
+            this.x += -20; 
+        }
+        if (keyCode === RIGHT_ARROW){
+            this.x += 20; 
+        }
+    }
+    draw() {
+        translate(this.x, this.y);
+        scale(-0.4, 0.4); 
+        if (i > 6) {
+            i = -1;
+        }
+        i++;
+        image(this.imgArray[i], 0, 0);
+    }
 }
