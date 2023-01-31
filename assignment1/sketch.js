@@ -1,17 +1,21 @@
 let drawing = "1";
 function setup() {
-    createCanvas(200, 200);
-    // noLoop();
+    createCanvas(200, 100);
+    noLoop();
   }
   
   function draw() {
     if(drawing === "1"){
+      createCanvas(200, 100); //Creates a canvas. Bc I don't know how to change the size after already drawing it. 
       first();
     } else if(drawing === "2"){
+      createCanvas(200, 200);
       opaque();
     } else if(drawing === "3"){
+      createCanvas(200, 100);
       third(); 
     }  else {
+      createCanvas(200, 200);
       star();
     }
   }
@@ -83,5 +87,7 @@ function setup() {
   function setDrawing(drawingParam){
     drawing = drawingParam; 
     background("white");
+    createCanvas(200, 100);
+    redraw();
    
   }
