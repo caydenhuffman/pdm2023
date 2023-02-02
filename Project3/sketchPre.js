@@ -15,6 +15,7 @@ function preload() {
     singer6 = loadImage("assets/singer/frame6.png");
     singer7 = loadImage("assets/singer/frame7.png");
     singer8 = loadImage("assets/singer/frame8.png");
+    singerStill = loadImage("assets/singer/frame0.png");
 }
 
 function setup() {
@@ -44,33 +45,37 @@ function draw() {
     //You can set the width of image by: "0.25 * singer1.width"; 
 }
 
-function keyIsDown() {
+function keyPressed() {
     singer.keyPressed();
 }
 
 class Sprite {
+
     constructor(imgArray, x, y) {
         this.imgArray = imgArray;
         this.x = x; 
         this.y = y; 
         
     }
-    keyPressed() {
+    keyClicked() {
         if (keyCode === LEFT_ARROW) {
             console.log("hey");
             this.x += -20; 
+            scale(0.4, 0.4);
         }
         if (keyCode === RIGHT_ARROW){
             this.x += 20; 
+            //I guess i could set the direction. if that makes sense and have a separate boolean. 
         }
     }
     draw() {
         translate(this.x, this.y);
-        scale(-0.4, 0.4); 
+        // scale(-0.4, 0.4); 
         if (i > 6) {
             i = -1;
         }
         i++;
-        image(this.imgArray[i], 0, 0);
+        // image(this.imgArray[0], 0, 0);
+        image(singerStill, 0, 0);
     }
 }
