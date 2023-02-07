@@ -31,19 +31,19 @@ function draw() {
     scale(0.5);
     image(background, 0, 0);
     pop();
-    sprites[0].draw(); 
-    sprites[1].draw(); 
+    sprites[0].draw();
+    sprites[1].draw();
 }
 function keyPressed() {
     // sprites.forEach(e => e.keyPressed());
-    sprites[0].keyPressed(); 
-    sprites[1].keyPressed(); 
+    sprites[0].keyPressed();
+    sprites[1].keyPressed();
 }
 
 function keyReleased() {
     // sprites.foreEach(e => e.keyReleased());
-    sprites[0].keyReleased(); 
-    sprites[1].keyReleased(); 
+    sprites[0].keyReleased();
+    sprites[1].keyReleased();
 }
 
 class Sprite {
