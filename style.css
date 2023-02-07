@@ -6,14 +6,11 @@ button{
     margin: 10px;
     color:antiquewhite;
     background-color: darkcyan;
-    border: #424242 1px outset;
+    border: #4f4f4f 3px outset;
     padding:10px;
 }
 button:hover {
-    /* color: darkcyan;
-    background-color:#f5f5dc; */
     font-weight: bold;
-    /* border: 1px #f5f5dc solid;  */
 }
 body{
     background-color: #f5f5dc;
