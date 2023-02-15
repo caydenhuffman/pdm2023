@@ -16,7 +16,8 @@ button:hover, button:active {
     margin: 6px 10px 2px 10px;
 }
 body{
-    background-color: #f5f5dc;
+    /* background-color: #f5f5dc; */
+    background-color: azure;
 }
 h1{
     color:darkcyan;
