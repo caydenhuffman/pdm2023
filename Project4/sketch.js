@@ -10,7 +10,6 @@ let speedUpdate = 0;
 let catchCount = 0; 
 
 let spriteSheetFilenames = ["butterflySpriteJar.png", "butterflySpriteEvil.png"]; //"numberSprite.png,
-// let spriteSheetFilenames = ["numberSprite.png"];
 let spriteSheets = [];
 let animations = [];
 
@@ -43,11 +42,6 @@ function reset() {
   catchCount = 0; 
 
   animations = [];
-  
-  // for (let i = 0; i < game.totalSprites; i++) {
-   
-  //   animations[i] = new WalkingAnimation(random(spriteSheets), 32, 32, random(20, 380), random(100, 300), 10, random(0.5, 1),10, random([0, 1]));
-  // }
 
   goodCount = Math.floor(random(game.totalSprites * 0.40, game.totalSprites * 0.7)); //determines the number of good butterflies. 
   for (let i = 0; i < goodCount; i++){
@@ -158,7 +152,6 @@ function mousePressed() {
   }
 
 }
-// new WalkingAnimation(random(spriteSheets),32 ,32,random(100,300),random(100,300),10,random(0.5,1),6,random([0,1]));
 class WalkingAnimation {
   constructor(spritesheet, sw, sh, dx, dy, animationLength, speed, framerate, vertical = false, offsetX = 0, offsetY = 0) {
     this.spritesheet = spritesheet;
