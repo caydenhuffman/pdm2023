@@ -1,43 +1,44 @@
-// let sound1 = new Tone.Player("sounds/chicken.wav");
-
 let sounds = new Tone.Players({
 
-  "blame": "sounds/Queen.m4a",
+  "Fearless": "sounds/Fearless.m4a",
   "sigh": "sounds/sighing.wav",
-  "queen": "sounds/queen.mov", 
-  "yass": "sounds/yass.m4a"
+  "Singing": "sounds/queen.mov", 
+  "yass": "sounds/yass.m4a", 
+
 
 })
 
-const delay = new Tone.FeedbackDelay("8n", 0.5);
+const delay = new Tone.FeedbackDelay("8n", 0.0);
+const dist = new Tone.Distortion(0.9);
 
-let soundNames = ["blame", "sigh", "queen", "yass"];
+let soundNames = ["Fearless", "sigh", "Singing", "yass"];
 let buttons = [];
 
 let dSlider;
 let fSlider;
 
-// let button1, button2, button3;
-
 function setup() {
-  createCanvas(400, 400);
+  
   sounds.connect(delay);
+
   delay.toDestination();
 
   soundNames.forEach((word, index) => {
     buttons[index] = createButton(word);
-    buttons[index].position(index, index*50);
+    buttons[index].position(10, index*30 + 10 );
     buttons[index].mousePressed( () => buttonSound(word))
   })
-
-  dSlider = createSlider(0., 1., 0.5, 0.05);
+  createCanvas(400, 400);
+  dSlider = createSlider(0., 1., 0.0, 0.05);
   dSlider.mouseReleased( () => {
     delay.delayTime.value = dSlider.value();
   })
 
-  fSlider = createSlider(0., 1., 0.5, 0.05);
+  fSlider = createSlider(0., 1., 0.0, 0.05);
   fSlider.mouseReleased( () => {
-    delay.feedback.value = fSlider.value();
+    delay.wet.value = fSlider.value();
+    // delay.distortion.value = fSlider.value(); 
+    // sounds.playBackRate.value = fSlider.value();
   })
 
 
@@ -45,7 +46,10 @@ function setup() {
 
 function draw() {
   background(220, 120, 180);
-  text('press the buttons for sound', 0, 150)
+  fill("white");
+  text('Press the buttons for a corresponding sound', 10, 150);
+  text('The first slider determines the delay time', 10, 170);
+  text('The second slider determines the feedback value', 10, 190);
 
 }
 
