@@ -1,13 +1,13 @@
 let pat = false;
 let bool = false;
 let rc;
-function preload() {
-  rc = loadImage('/Project7/pictures/rockCoin.jpg');
-}
+// function preload() {
+//   rc = loadImage('/Project7/pictures/rockCoin.jpg');
+// }
 
 
 function setup() {
-  createCanvas(400, 400);
+  // createCanvas(400, 400);
 
 }
 
@@ -59,18 +59,18 @@ const melody = new Tone.Sequence((time, note) => {
 duoSynth.volume.value = -30;
 
 function draw() {
-  background("pink");
+  // background("pink");
 
   if ((frameCount % 10) === 0) {
     osc.frequency.setValueAtTime(random(100, 300));
   }
   // image(rc, -300,0);
 
-  push()
+  // push()
 
-  scale(0.7);
-  image(rc, 0, 0);
-  pop();
+  // scale(0.7);
+  // image(rc, 0, 0);
+  // pop();
 }
 
 function keyPressed() {
