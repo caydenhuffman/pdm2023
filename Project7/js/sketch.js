@@ -47,7 +47,7 @@ noise.connect(autoFilter);
 const synth2 = new Tone.AMSynth().toDestination();
 const loop = new Tone.Loop(time => {
   synth2.triggerAttackRelease("E2", "16n", time);
-}, "3n").start("8n");
+}, "3n");
 
 let duoSynth = new Tone.DuoSynth().toDestination();
 
@@ -82,6 +82,7 @@ function keyPressed() {
       autoFilter.stop();
       osc.stop();
       melody.stop();
+      loop.stop(); 
       console.log("Pattern Stopped.");
     } else {
       pat = true;
@@ -91,6 +92,7 @@ function keyPressed() {
       noise.start();
       autoFilter.start();
       melody.start();
+      loop.start();
       osc.start();
     }
   }
