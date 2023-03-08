@@ -1,63 +1,97 @@
-let nb = false;
-let filt = true;
-let color = 'black';
-const noise = new Tone.Noise("brown"); //needs to start
-const autoFilter = new Tone.AutoFilter({
-  frequency: "2n",
-  baseFrequency: 1,
-  octaves: 8
-}).toDestination();
+let pat = false;
+let bool = false;
+let rc;
+function preload() {
+  rc = loadImage('/Project7/pictures/rockCoin.jpg');
+}
 
-
-const loop = new Tone.Loop((time) => {
-  // triggered every eighth note. 
-  console.log(time);
-}, "8n").start(0);
-Tone.Transport.start();
-
-noise.connect(autoFilter);
-autoFilter.start();
 
 function setup() {
   createCanvas(400, 400);
+
 }
 
+
+
+let synth = new Tone.MonoSynth().toDestination();
+synth.volume.value = -30;
+
+const osc = new Tone.Oscillator(300, "sine").toDestination();
+let gain = new Tone.Gain().toDestination();
+let pan = new Tone.Panner().connect(gain);
+let ampEnv = new Tone.AmplitudeEnvelope({
+  attack: 1,
+  decay: 0.2,
+  sustain: .1,
+  release: .1
+}).connect(pan);
+osc.connect(ampEnv);
+osc.volume.value = -25;
+
+//So patterns are ran by the synths. 
+let pattern = new Tone.Pattern(function (time, note) {
+  synth.triggerAttackRelease(note, 0.8, time);
+}, ['C5', "A3", 'D4', 'E2', 'E3', 'A2', 'D#3', 'Fb4']);
+
+
+//This section is dedicated to my pink noise & filter.  
+const noise = new Tone.Noise("pink"); //needs to start
+const autoFilter = new Tone.AutoFilter({
+  frequency: "1n",
+  baseFrequency: 1,
+  octaves: 8
+}).toDestination();
+noise.connect(autoFilter);
+
+
+const synth2 = new Tone.AMSynth().toDestination();
+const loop = new Tone.Loop(time => {
+  synth2.triggerAttackRelease("E2", "16n", time);
+}, "3n").start("8n");
+
+let duoSynth = new Tone.DuoSynth().toDestination();
+
+
+
+const melody = new Tone.Sequence((time, note) => {
+  duoSynth.triggerAttackRelease(note, "10n", time);
+}, ["B2", ["A1", "A2", "A3", "A4", "A5"], "G2"]);
+duoSynth.volume.value = -30;
+
 function draw() {
-  text('pink: filter, white: unfilter', 100, 100);
-  background(color);
+  background("pink");
+
+  if ((frameCount % 10) === 0) {
+    osc.frequency.setValueAtTime(random(100, 300));
+  }
+  // image(rc, -300,0);
+
+  push()
+
+  scale(0.7);
+  image(rc, 0, 0);
+  pop();
 }
 
 function keyPressed() {
   if (keyCode === 32) {
-    if (nb) {
+    if (pat) {
+      pat = false;
+      pattern.stop();
       noise.stop();
-      console.log("Off");
-      nb = false;
-      color = "black";
       autoFilter.stop();
+      osc.stop();
+      melody.stop();
+      console.log("Pattern Stopped.");
     } else {
-      filt ? color = "pink" : color = "lightgrey";
+      pat = true;
+      pattern.start();
+      console.log("Pattern Started.");
+      Tone.Transport.start();
       noise.start();
-      nb = true;
-      console.log("True");
-    }
-  }
-  if (keyCode === 49) {
-    console.log("Noise: " + nb + "\nFilter: " + filt);
-  }
-}
-function mousePressed() {
-  console.log('pressed');
-  if (nb) {
-    if (filt) {
-      color = "pink";
       autoFilter.start();
-      filt = false;
-    } else {
-      color = "LightGrey";
-      filt = true;
-      autoFilter.stop();
+      melody.start();
+      osc.start();
     }
   }
-
 }
