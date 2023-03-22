@@ -1,12 +1,10 @@
 let sounds = new Tone.Players({
-
   "Fearless": "sounds/Fearless.m4a",
   "sigh": "sounds/sighing.wav",
   "Singing": "sounds/queen.mov", 
   "yass": "sounds/yass.m4a", 
-
-
 })
+
 
 const delay = new Tone.FeedbackDelay("8n", 0.0);
 const dist = new Tone.Distortion(0.9);
